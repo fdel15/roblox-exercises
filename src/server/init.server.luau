@@ -1,1 +1,32 @@
 print("Hello world, from server!")
+
+-- local ServerScriptService = game:GetService("ServerScriptService")
+local Workspace = game:GetService("Workspace")
+
+local CrateFactory = require(script.getting_started.crate_factory)
+
+CrateFactory.spawnCrate({
+    centerPosition = Vector3.new(10, 2.4, 0),
+    parent = Workspace,
+})
+
+CrateFactory.spawnCrate({
+    centerPosition = Vector3.new(30, 2.4, 0),
+    parent = Workspace,
+    scaleFactor = 5,
+    name = "GiantCrate",
+})
+
+CrateFactory.spawnCrate({
+    centerPosition = Vector3.new(-10, 2.4, 0),
+    parent = Workspace,
+    name = "DynamicCrate",
+    scaleFactor = 2,
+})
+
+CrateFactory.spawnCrate({
+    centerPosition = Vector3.new(-20, 2.4, 0),
+    parent = Workspace,
+    name = "DynamicCrate",
+    scaleFactor = 0.5,
+})
