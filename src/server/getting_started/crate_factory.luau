@@ -8,14 +8,16 @@ type CrateOptions = {
 
     -- optional
     brickColor: BrickColor?,
+    lightWeight: boolean?,
     material: Enum.Material?,
     name: string?,
-    scaleFactor: number?
+    scaleFactor: number?,
 }
 
 -- Default values for crate options
 local CrateDefaults = {
     brickColor = BrickColor.new("Burnt Sienna"),
+    lightWeight = false,
     material = Enum.Material.Wood,
     name = "DefaultCrate",
     scaleFactor = 1
@@ -37,6 +39,14 @@ local CRATE_SIZE = Vector3.new(4,4,4)
 local CAP_SIZE   = Vector3.new(4.4, 0.4, 4.4)
 local COL_SIZE = Vector3.new(0.4, 4, 0.4)
 
+-- LIGHT_WEIGHT config will be applied if lightWeight is true. It allows crates to be movable
+-- even if their size would make it physically impossible
+local LIGHT_WEIGHT_CONFIG = {
+    density = 0.1,
+    friction = 0.3,
+    elasticity = 0.5
+}
+
 local function createStaticPart(name: string, size: Vector3, localCFrame: CFrame, basePart: Part, model: Model)
     local part = Instance.new("Part")
     part.Name = name
@@ -51,15 +61,24 @@ local function createStaticPart(name: string, size: Vector3, localCFrame: CFrame
     return part
 end
 
-local function weldThenUnanchorParts(crate: Model, base: Part)
+local function weldThenUnanchorParts(crate: Model, base: Part, lightWeight: boolean)
     for _, child in ipairs(crate:GetChildren()) do
-        if child:IsA("BasePart") and child ~= base then
-            local weld = Instance.new("WeldConstraint")
-            weld.Name = child.Name .. "Weld"
-            weld.Part0 = base
-            weld.Part1 = child
-            weld.Parent = child
+        if child:IsA("BasePart") then
             child.Anchored = false
+            if lightWeight then
+                child.CustomPhysicalProperties = PhysicalProperties.new(
+                    LIGHT_WEIGHT_CONFIG.density,
+                    LIGHT_WEIGHT_CONFIG.friction,
+                    LIGHT_WEIGHT_CONFIG.elasticity
+                )
+            end
+            if child ~= base then
+                local weld = Instance.new("WeldConstraint")
+                weld.Name = child.Name .. "Weld"
+                weld.Part0 = base
+                weld.Part1 = child
+                weld.Parent = child
+            end
         end
     end
 end
@@ -102,8 +121,8 @@ function CrateFactory.spawnCrate(opts: CrateOptions): Model
         crate:ScaleTo(scaleFactor)
     end
     
-    weldThenUnanchorParts(crate, base)
-    base.Anchored = false
+    local lightWeight = opts.lightWeight or CrateDefaults.lightWeight
+    weldThenUnanchorParts(crate, base, lightWeight)
 
     return crate
 end

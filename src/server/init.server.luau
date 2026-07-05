@@ -15,6 +15,8 @@ CrateFactory.spawnCrate({
     parent = Workspace,
     scaleFactor = 5,
     name = "GiantCrate",
+    lightWeight = true,
+    material = Enum.Material.SmoothPlastic,
 })
 
 CrateFactory.spawnCrate({
@@ -22,11 +24,12 @@ CrateFactory.spawnCrate({
     parent = Workspace,
     name = "DynamicCrate",
     scaleFactor = 2,
+    lightWeight = true,
 })
 
 CrateFactory.spawnCrate({
     centerPosition = Vector3.new(-20, 2.4, 0),
     parent = Workspace,
-    name = "DynamicCrate",
+    name = "TinyCrate",
     scaleFactor = 0.5,
 })
