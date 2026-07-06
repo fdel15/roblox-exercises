@@ -4,6 +4,7 @@ print("Hello world, from server!")
 local Workspace = game:GetService("Workspace")
 
 local CrateFactory = require(script.getting_started.crate_factory)
+local TvFactory = require(script.getting_started.tv_factory)
 
 CrateFactory.spawnCrate({
     centerPosition = Vector3.new(10, 2.4, 0),
@@ -33,3 +34,10 @@ CrateFactory.spawnCrate({
     name = "TinyCrate",
     scaleFactor = 0.5,
 })
+
+local tv = TvFactory.spawn({
+    parent = Workspace,
+    position = Vector3.new(10, 10, 0)
+})
+
+tv.Anchored = true
