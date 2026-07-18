@@ -6,16 +6,55 @@
      at 0.25, and a 2:1 ration between x and y
 ]]
 
-local TvFactory = {}
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerStorage = game:GetService("ServerStorage")
+
+-- local TvScreenLogicModule = ServerStorage:WaitForChild("tv_screen")
+
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local PropertyUtilsScript = Shared:WaitForChild("property_utils")
+local ServerStorageServer = ServerStorage:WaitForChild("Server")
+local TvScreenScript = ServerStorageServer:WaitForChild("tv_screen")
+
 local PropertyUtils = require(PropertyUtilsScript)
+local ScreenLogic = require(TvScreenScript)
+
+
+local TvFactory = {}
 
 type TvConfig = {
     parent: Model,
     position: Vector3
 }
+
+local SCREEN_COLOR = Color3.new(159, 158, 161)
+
+function createScreen(base: Part, parent: Instance): Part
+    local screen = base:Clone()
+    screen.Color = SCREEN_COLOR
+    screen.CFrame = base.CFrame * CFrame.new(0, 0, 0.3)
+    screen.Material = Enum.Material.Neon
+    screen.Name = "Screen"
+    screen.Parent = parent
+
+    -- add surface light
+    local sf = Instance.new("SurfaceLight")
+    sf.Parent = screen
+    sf.Enabled = true
+    sf.Face = Enum.NormalId.Back
+    sf.Brightness = 1
+    sf.Color = Color3.new(255,255,255)
+    sf.Range = 5
+    sf.Shadows = true
+
+    -- tag  object so we can use CollectionService to add script
+    screen.AddTag(screen, "tvscreen")
+
+    local channelDisplay = ScreenLogic.setupChannelDisplay(screen)
+    ScreenLogic.AddOnOff(screen, parent, channelDisplay)
+
+    return screen
+end
 
 function TvFactory.spawn(config: TvConfig): Model
     local model = Instance.new("Model")
@@ -24,18 +63,14 @@ function TvFactory.spawn(config: TvConfig): Model
     -- create base
     local base = Instance.new("Part")
     base.Anchored = true
+    base.BrickColor = BrickColor.new("Black")
     base.Name = "Base"
     base.Parent = model
     base.Position = config.position
     base.Size = Vector3.new(12,6,0.25)
 
     -- create Screen
-    local screen = base:Clone()
-    screen.Color = Color3.new(159, 158, 161)
-    screen.CFrame = base.CFrame * CFrame.new(0, 0, 0.3)
-    screen.Material = Enum.Material.Neon
-    screen.Name = "Screen"
-    screen.Parent = model
+    createScreen(base, model)
 
     -- create frame around base
     local verticalFrameL = Instance.new("Part")

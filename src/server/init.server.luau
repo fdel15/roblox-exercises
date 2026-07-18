@@ -2,6 +2,7 @@ print("Hello world, from server!")
 
 -- local ServerScriptService = game:GetService("ServerScriptService")
 local Workspace = game:GetService("Workspace")
+local CollectionService = game:GetService("CollectionService")
 
 local CrateFactory = require(script.getting_started.crate_factory)
 local TvFactory = require(script.getting_started.tv_factory)
@@ -41,3 +42,18 @@ local tv = TvFactory.spawn({
 })
 
 tv.Anchored = true
+
+local tv2 = TvFactory.spawn({
+    parent = Workspace,
+    position = Vector3.new(20, 20, 0)
+})
+
+tv2.Anchored = true
+
+-- local function manageScreen(screen: Part, i: number)
+--     print("hello from " .. screen.Name .. i )
+-- end
+
+-- for i, screen in CollectionService:GetTagged("tvscreen") do
+--     task.spawn(manageScreen, screen, i)
+-- end
