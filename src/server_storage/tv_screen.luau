@@ -25,7 +25,7 @@ function ScreenLogic.setupChannelDisplay(screen: Part)
     return imageLabel
 end
 
-function ScreenLogic.AddOnOff(screen: Part, tvModel: Part, channelDisplay: ImageLabel)
+function ScreenLogic.AddOnOff(screen: Part, tvModel: Part, channelDisplay: ImageLabel, powerButton: Part)
     local clickDetector = Instance.new("ClickDetector")
     clickDetector.MaxActivationDistance = 50
     clickDetector.Parent = screen
@@ -35,6 +35,13 @@ function ScreenLogic.AddOnOff(screen: Part, tvModel: Part, channelDisplay: Image
     tvModel:GetAttributeChangedSignal("IsOn"):Connect(function()
         local tvState = tvModel:GetAttribute("IsOn")
         channelDisplay.Visible = tvState
+
+        if tvState then
+            powerButton.BrickColor = BrickColor.new("Dark green")
+        else
+            powerButton.BrickColor = BrickColor.new("Crimson")
+        end
+    
         print("📺 TV Power State Changed. Is On:", tvState)
     end)
 

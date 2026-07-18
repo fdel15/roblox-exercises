@@ -29,7 +29,7 @@ type TvConfig = {
 
 local SCREEN_COLOR = Color3.new(159, 158, 161)
 
-function createScreen(base: Part, parent: Instance): Part
+function createScreen(base: Part, parent: Instance, powerButton: Part): Part
     local screen = base:Clone()
     screen.Color = SCREEN_COLOR
     screen.CFrame = base.CFrame * CFrame.new(0, 0, 0.3)
@@ -51,7 +51,7 @@ function createScreen(base: Part, parent: Instance): Part
     screen.AddTag(screen, "tvscreen")
 
     local channelDisplay = ScreenLogic.setupChannelDisplay(screen)
-    ScreenLogic.AddOnOff(screen, parent, channelDisplay)
+    ScreenLogic.AddOnOff(screen, parent, channelDisplay, powerButton)
 
     return screen
 end
@@ -68,9 +68,6 @@ function TvFactory.spawn(config: TvConfig): Model
     base.Parent = model
     base.Position = config.position
     base.Size = Vector3.new(12,6,0.25)
-
-    -- create Screen
-    createScreen(base, model)
 
     -- create frame around base
     local verticalFrameL = Instance.new("Part")
@@ -113,6 +110,9 @@ function TvFactory.spawn(config: TvConfig): Model
     powerButton.Name = "PowerButton"
     powerButton.Size = Vector3.new(0.5, 0.3, 0.2)
     powerButton.Parent = model
+
+    -- create Screen
+    createScreen(base, model, powerButton)
 
     PropertyUtils.WeldFrameToBase(model, base)
 
