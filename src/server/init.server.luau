@@ -6,6 +6,7 @@ local CollectionService = game:GetService("CollectionService")
 
 local CrateFactory = require(script.getting_started.crate_factory)
 local TvFactory = require(script.getting_started.tv_factory)
+local LadderFactory = require(script.getting_started.ladder_factory)
 
 CrateFactory.spawnCrate({
     centerPosition = Vector3.new(10, 2.4, 0),
@@ -49,6 +50,12 @@ local tv2 = TvFactory.spawn({
 })
 
 tv2.Anchored = true
+
+LadderFactory.spawn({
+    parent = Workspace,
+    position = Vector3.new(55,1,0),
+    size = Vector3.new(2,20,2)
+})
 
 -- local function manageScreen(screen: Part, i: number)
 --     print("hello from " .. screen.Name .. i )
