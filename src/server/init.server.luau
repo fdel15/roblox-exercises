@@ -57,6 +57,12 @@ LadderFactory.spawn({
     size = Vector3.new(2,20,2)
 })
 
+LadderFactory.spawnRopeWall({
+    parent = Workspace,
+    position = Vector3.new(65, 1, 0),
+    size = Vector3.new(25, 25, 3)
+})
+
 -- local function manageScreen(screen: Part, i: number)
 --     print("hello from " .. screen.Name .. i )
 -- end
