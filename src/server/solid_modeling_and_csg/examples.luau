@@ -10,7 +10,7 @@ local SinkFactoryScript = SolidModelingAndCSG:WaitForChild("sink_factory")
 local SinkFactory = require(SinkFactoryScript)
 
 SinkFactory.spawn({
-    cframe = CFrame.new(10,6,0),
+    cframe = CFrame.new(10,3,0),
     parent = Workspace,
 })
 

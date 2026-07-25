@@ -50,15 +50,6 @@ function buildSinkBasin(): (boolean, UnionOperation)
     bowlCutter.Size = Vector3.new(4.5, 4.5, 4.5)
     bowlCutter.Position = Vector3.new(0, 0.8, 0)
 
-    -- The Faucet Hole Cutter
-
-    local faucetCutter = Instance.new("Part")
-    faucetCutter.Shape = Enum.PartType.Cylinder
-    faucetCutter.Size = Vector3.new(4, 0.8, 0.8)
-
-    faucetCutter.CFrame = CFrame.new(0, 0, -1.2)
-                          * CFrame.Angles(0, 0, math.rad(90))
-
     -- Perform CSG Operations
     local cutters = { bowlCutter }
 
@@ -68,7 +59,6 @@ function buildSinkBasin(): (boolean, UnionOperation)
 
     -- Cleanup
     bowlCutter:Destroy()
-    faucetCutter:Destroy()
     counterBlock:Destroy()
 
     local resultUnion = Instance.new("UnionOperation")
