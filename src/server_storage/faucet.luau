@@ -1,5 +1,3 @@
-print("Hello from faucet logic")
-
 local TweenService = game:GetService("TweenService")
 
 
@@ -11,7 +9,6 @@ function FaucetLogic.AddHandleActions(cold: Part, hot: Part, emitter: ParticleEm
 end
 
 function toggleHandle(handle: Part, emitter: ParticleEmitter)
-    print("Toggle Handle " .. handle.Name)
     local clickDetector = Instance.new("ClickDetector")
     clickDetector.MaxActivationDistance = 10
     clickDetector.Parent = handle
