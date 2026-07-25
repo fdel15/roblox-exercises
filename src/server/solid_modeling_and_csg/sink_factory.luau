@@ -1,6 +1,12 @@
 local SinkFactory = {}
 
 local GeometryService = game:GetService("GeometryService")
+local ServerStorage = game:GetService("ServerStorage")
+
+local ServerStorageServer = ServerStorage:WaitForChild("Server")
+local FaucetLogicScript = ServerStorageServer:WaitForChild("faucet")
+
+local FaucetLogic = require(FaucetLogicScript)
 
 type SinkConfig = {
     parent: Model,
@@ -162,6 +168,23 @@ function buildFaucet(): Model
     neck.Anchored = true
     neck.Parent = model
 
+
+    local spout = Instance.new("Attachment")
+    spout.Name = "Spout"
+    spout.Parent = neck
+
+    local waterEmitter = Instance.new("ParticleEmitter")
+    waterEmitter.Name = "WaterEmitter"
+    waterEmitter.Enabled = false
+    waterEmitter.EmissionDirection = Enum.NormalId.Back
+    waterEmitter.Rate = 0
+    waterEmitter.Speed = NumberRange.new(6, 7)
+    waterEmitter.Lifetime = NumberRange.new(0.4, 0.5)
+    waterEmitter.Size = NumberSequence.new(0.25)
+    waterEmitter.Transparency = NumberSequence.new(0.3)
+    waterEmitter.Color = ColorSequence.new(Color3.fromRGB(180, 220, 255))
+    waterEmitter.Parent = spout
+
     local handleHot = Instance.new("Part")
     handleHot.Name = "HandleHot"
     handleHot.Shape = Enum.PartType.Cylinder
@@ -184,6 +207,7 @@ function buildFaucet(): Model
 
     model.PrimaryPart = base
     weldToPrimary(model)
+    FaucetLogic.AddHandleActions(handleCold, handleHot, waterEmitter)
 
 
     return model
