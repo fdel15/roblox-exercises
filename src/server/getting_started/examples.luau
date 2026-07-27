@@ -78,4 +78,14 @@ LadderFactory.spawnRopeWall({
 --     task.spawn(manageScreen, screen, i)
 -- end
 
+-- -75.343, 27.705, -35.512
+
+local brightonLadder = LadderFactory.spawnRopeWall({
+    parent = Workspace,
+    position = Vector3.new(-80, 0, -14),
+    size = Vector3.new(25, 75, 3)
+})
+
+brightonLadder.Parent:ScaleTo(2)
+brightonLadder.Position = Vector3.new(-80, 0, -14)
 return {}

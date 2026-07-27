@@ -10,7 +10,8 @@ local FaucetLogic = require(FaucetLogicScript)
 
 type SinkConfig = {
     parent: Model,
-    cframe: CFrame
+    cframe: CFrame,
+    scale: number,
 }
 
 function SinkFactory.spawn(config: SinkConfig): Model
@@ -34,8 +35,9 @@ function SinkFactory.spawn(config: SinkConfig): Model
     weldToPrimary(model)
 
     model.Name = "Sink"
-    model.Parent = config.parent
     model:PivotTo(config.cframe)
+    model:ScaleTo(config.scale)
+    model.Parent = config.parent
     return model
 end
 
