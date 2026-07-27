@@ -27,7 +27,7 @@ function CerealBowlFactory.spawn(config: CerealBowlConfig): Model
 
     model.PrimaryPart = bowl
     model:PivotTo(config.cframe)
-    model:ScaleTo(config.scale * 0.5)
+    model:ScaleTo(config.scale * 0.35)
     model.Parent = config.parent
     return model
 end
