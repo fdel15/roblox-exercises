@@ -127,16 +127,13 @@ function buildCereal(): Model
     if success then
         piece = newParts[1]
         piece.Anchored = true
-        piece.Name = "Piece0"
-        piece.Parent = model
-        piece.CFrame = cerealPieceCFrame()
         piece.Size = Vector3.new(0.05, 0.3, 0.3)
 
         local number_of_pieces = 25
 
         for i = 1, number_of_pieces do
             local p = piece:Clone()
-            p.Name = "Piece" .. i
+            p.Name = string.format("Piece%02d", i)
             p.CFrame = cerealPieceCFrame()
             p.Parent = model
         end
@@ -151,9 +148,8 @@ end
 function cerealPieceCFrame(): CFrame
     local x = math.random() * direction()
     local z = math.random() * direction()
-    local angle = 90 + math.random(10, 20) * direction()
-
-    return CFrame.new(x, -0.25, z) * CFrame.Angles(0, 0, angle)
+    local a = 90 + (math.random(10,20) * direction())
+    return CFrame.new(x, -0.25, z) * CFrame.Angles(0, 0, math.rad(a))
 end
 
 function direction(): number
