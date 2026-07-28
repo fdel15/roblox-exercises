@@ -28,7 +28,7 @@ local EngravingDetailFactory = require(EngravingDetailScript)
 EngravingDetailFactory.spawn({
     parent = Workspace,
     cframe = CFrame.new(0, 10, 0),
-    scale  = 1,
+    scale  = 0.25,
 })
 
 return {}
