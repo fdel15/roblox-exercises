@@ -53,7 +53,7 @@ function buildBowl(): (boolean, UnionOperation)
 
     if success then
         sphere = newParts[1]
-        sphere.Anchored = true
+        s1phere.Anchored = true
     else
         warn("failed build sphere: ")
         warn(newParts)
