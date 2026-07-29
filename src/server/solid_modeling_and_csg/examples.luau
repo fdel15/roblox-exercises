@@ -5,10 +5,12 @@ local ServerScriptService = game:GetService("ServerScriptService")
 local Server = ServerScriptService:WaitForChild("Server")
 local SolidModelingAndCSG = Server:WaitForChild("solid_modeling_and_csg")
 
+local ArchFactoryScript = SolidModelingAndCSG:WaitForChild("arch_factory")
 local CerealBowlFactoryScript = SolidModelingAndCSG:WaitForChild("cereal_bowl_factory")
 local SinkFactoryScript = SolidModelingAndCSG:WaitForChild("sink_factory")
 local EngravingDetailScript = SolidModelingAndCSG:WaitForChild("engraving_detail_factory")
 
+local ArchFactory = require(ArchFactoryScript)
 local CerealBowlFactory = require(CerealBowlFactoryScript)
 local SinkFactory = require(SinkFactoryScript)
 local EngravingDetailFactory = require(EngravingDetailScript)
@@ -25,10 +27,16 @@ local EngravingDetailFactory = require(EngravingDetailScript)
 --     scale = 1,
 -- })
 
-EngravingDetailFactory.spawn({
+-- EngravingDetailFactory.spawn({
+--     parent = Workspace,
+--     cframe = CFrame.new(0, 10, 0),
+--     scale  = 0.25,
+-- })
+
+ArchFactory.spawn({
     parent = Workspace,
     cframe = CFrame.new(0, 10, 0),
-    scale  = 0.25,
+    scale = 1,
 })
 
 return {}
