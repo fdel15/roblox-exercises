@@ -6,14 +6,16 @@ local Server = ServerScriptService:WaitForChild("Server")
 local SolidModelingAndCSG = Server:WaitForChild("solid_modeling_and_csg")
 
 local ArchFactoryScript = SolidModelingAndCSG:WaitForChild("arch_factory")
+local BrokenWallFactoryScript = SolidModelingAndCSG:WaitForChild("broken_wall_factory")
 local CerealBowlFactoryScript = SolidModelingAndCSG:WaitForChild("cereal_bowl_factory")
-local SinkFactoryScript = SolidModelingAndCSG:WaitForChild("sink_factory")
 local EngravingDetailScript = SolidModelingAndCSG:WaitForChild("engraving_detail_factory")
+local SinkFactoryScript = SolidModelingAndCSG:WaitForChild("sink_factory")
 
 local ArchFactory = require(ArchFactoryScript)
+local BrokenWallFactory = require(BrokenWallFactoryScript)
 local CerealBowlFactory = require(CerealBowlFactoryScript)
-local SinkFactory = require(SinkFactoryScript)
 local EngravingDetailFactory = require(EngravingDetailScript)
+local SinkFactory = require(SinkFactoryScript)
 
 -- SinkFactory.spawn({
 --     cframe = CFrame.new(10,3,0),
@@ -30,10 +32,16 @@ local EngravingDetailFactory = require(EngravingDetailScript)
 -- EngravingDetailFactory.spawn({
 --     parent = Workspace,
 --     cframe = CFrame.new(0, 10, 0),
---     scale  = 0.25,
+--     scale  = 1,
 -- })
 
-ArchFactory.spawn({
+-- ArchFactory.spawn({
+--     parent = Workspace,
+--     cframe = CFrame.new(0, 10, 0),
+--     scale = 1,
+-- })
+
+BrokenWallFactory.spawn({
     parent = Workspace,
     cframe = CFrame.new(0, 10, 0),
     scale = 1,
