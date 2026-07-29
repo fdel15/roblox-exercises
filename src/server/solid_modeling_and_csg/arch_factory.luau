@@ -40,6 +40,11 @@ function ArchFactory.spawn(config: ArchConfig): Model
         warn(newParts)
     end
 
+    -- Cleanup
+    outerwall:Destroy()
+    innerwall:Destroy()
+    cylinder:Destroy()
+
     model:PivotTo(config.cframe)
     model:ScaleTo(config.scale)
     model.Parent = config.parent
