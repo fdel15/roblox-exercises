@@ -9,12 +9,14 @@ local ArchFactoryScript = SolidModelingAndCSG:WaitForChild("arch_factory")
 local BrokenWallFactoryScript = SolidModelingAndCSG:WaitForChild("broken_wall_factory")
 local CerealBowlFactoryScript = SolidModelingAndCSG:WaitForChild("cereal_bowl_factory")
 local EngravingDetailScript = SolidModelingAndCSG:WaitForChild("engraving_detail_factory")
+local RockFactoryScript = SolidModelingAndCSG:WaitForChild("rock_factory")
 local SinkFactoryScript = SolidModelingAndCSG:WaitForChild("sink_factory")
 
 local ArchFactory = require(ArchFactoryScript)
 local BrokenWallFactory = require(BrokenWallFactoryScript)
 local CerealBowlFactory = require(CerealBowlFactoryScript)
 local EngravingDetailFactory = require(EngravingDetailScript)
+local RockFactory = require(RockFactoryScript)
 local SinkFactory = require(SinkFactoryScript)
 
 -- SinkFactory.spawn({
@@ -41,9 +43,15 @@ local SinkFactory = require(SinkFactoryScript)
 --     scale = 1,
 -- })
 
-BrokenWallFactory.spawn({
+-- BrokenWallFactory.spawn({
+--     parent = Workspace,
+--     cframe = CFrame.new(0, 10, 0),
+--     scale = 1,
+-- })
+
+RockFactory.spawn({
     parent = Workspace,
-    cframe = CFrame.new(0, 10, 0),
+    cframe = CFrame.new(0, 0, 0),
     scale = 1,
 })
 
