@@ -4,4 +4,7 @@ print("Hello world, from server!")
 -- require(script.getting_started.examples)
 
 -- Chapter 2
-require(script.solid_modeling_and_csg.examples)
+-- require(script.solid_modeling_and_csg.examples)
+
+-- Chapter 3
+require(script.sculpting_terrain.examples)
